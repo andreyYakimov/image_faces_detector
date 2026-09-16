@@ -1,0 +1,11 @@
+{
+    "name": "image-face-detector",
+    "version-string": "1.0.0",
+    "dependencies": [
+        "boost-program-options",
+        "boost-dll",
+        "jsoncpp",
+        "opencv4",
+        "gtest"
+    ]
+}
