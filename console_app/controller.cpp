@@ -258,7 +258,7 @@ public:
 			std::array<DetectionResult, 1> detection_result_buffer;
 			detection_result_buffer[0] = DetectionResult{
 				image_path,
-				out_image_path,
+				found_faces_count ? out_image_path : std::filesystem::path(),
 				std::move(found_faces)
 			};
 
@@ -305,6 +305,8 @@ public:
 
 	void file_scanner_done(bool result, size_t images_count)
 	{
+		m_working_queue.stop();
+				
 		m_images_count = images_count;
 		m_scanner_done = true;
 
@@ -313,8 +315,6 @@ public:
 			mark_as_finished();
 			return;
 		}
-
-		m_working_queue.stop();
 
 		stop_pipeline_if_done();
 	}
